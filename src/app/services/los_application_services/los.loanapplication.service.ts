@@ -29,7 +29,7 @@ export class CustomerOnboardingService {
           return this.http.post(this.LOAN_APPLICATION_API, loanApplication).subscribe
           ( 
             data => {
-                this.logger.log(data.json)
+                this.logger.log(data.json())
            // alert("User created successfully.");
           });
   

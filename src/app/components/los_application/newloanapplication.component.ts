@@ -6,6 +6,7 @@ RequestOptions,
 Headers,
 HttpModule
 } from '@angular/http';
+import { ActivatedRoute, Router, ParamMap, Params } from '@angular/router';
 
 import { HttpErrorResponse } from '@angular/common/http';
 import {ErrorStateMatcher} from '@angular/material/core';
@@ -29,8 +30,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./newloanapplication.component.css'],
   providers:  [AddressService, CustomerOnboardingService, Logger]
 })
-export class LoanApplicationNew implements OnInit {
-  
+export class LoanApplicationNew implements OnInit  {
+  registrationResponseModal = true;
+  result : any;
+  customerId : any;
   title = 'app';
   isLinear = false;
   firstFormGroup: FormGroup;
@@ -41,7 +44,8 @@ export class LoanApplicationNew implements OnInit {
     private http:Http ,
     private logger:Logger,
     private custOnbService:CustomerOnboardingService,
-    private adddressService:AddressService
+    private adddressService:AddressService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -140,6 +144,24 @@ storeLoanApplication(){
     this.loanApplication=this.model;
     this.logger.log("BeforeSubmit Check"+JSON.stringify(this.model) ) ;
     this.custOnbService.createLoanApplication(this.loanApplication);
+   // this.result = this.logger.log(JSON.stringify);
+    //console.log(this.result);
+    setTimeout(()=>{
+      this.result = this.logger.getData();
+      
+      this.customerId= this.result.id;
+    
+    },1000);  
+    this.registrationResponseModal = false;
+    setTimeout(()=>{
+      window.location.reload();
+    },10000);
+  }
+
+  onClose(){
+    if( this.registrationResponseModal == false){
+          window.location.reload();
+      }
   }
   
   newLoanApplication() {
@@ -148,4 +170,5 @@ storeLoanApplication(){
     this.loanApplication = new LoanApplication('','','','','','','','','','','','','','','','','','','','');
     this.logger.log(this.loanApplication);
   }
+  
 }

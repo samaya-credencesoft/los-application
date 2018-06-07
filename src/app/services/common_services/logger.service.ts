@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 @Injectable()
 export class Logger {
-    log(msg: any)   { console.log(msg); }
+    data :any;
+    log(msg: any)   { console.log(msg);  this.data=msg; }
     error(msg: any) { console.error(msg); }
     warn(msg: any)  { console.warn(msg); }
+    getData(){
+      return this.data;
+    }
   }
