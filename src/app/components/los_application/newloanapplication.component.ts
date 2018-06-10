@@ -31,9 +31,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   providers:  [AddressService, CustomerOnboardingService, Logger]
 })
 export class LoanApplicationNew implements OnInit  {
+  
+  reponseWait : any = true;
   registrationResponseModal = true;
   result : any;
-  customerId : any;
+  loanApplicationId : any;
   title = 'app';
   isLinear = false;
   firstFormGroup: FormGroup;
@@ -148,20 +150,24 @@ storeLoanApplication(){
     //console.log(this.result);
     setTimeout(()=>{
       this.result = this.logger.getData();
-      
-      this.customerId= this.result.id;
+      this.loanApplicationId= this.result.id;
+      this.registrationResponseModal = false;
+      this.reponseWait = false;
+    },5000);  
     
-    },1000);  
-    this.registrationResponseModal = false;
     setTimeout(()=>{
       window.location.reload();
+      // window.close();
     },10000);
   }
 
   onClose(){
     if( this.registrationResponseModal == false){
-          window.location.reload();
-      }
+      // this.router.navigate(['/']);
+      window.location.reload();
+      // window.close();
+    }
+    
   }
   
   newLoanApplication() {

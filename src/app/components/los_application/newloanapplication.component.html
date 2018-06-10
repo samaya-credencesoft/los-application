@@ -217,23 +217,23 @@
   
 
 <!-- Modal -->
-<div *ngIf="!registrationResponseModal" class="modal fade" id="loanApplicationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">LOS Response </h5>
-      <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div> -->
-    <div class="modal-body">
-      <span>You have successfully applied the loan our team will be in touch with you very shortly. 
-        Your registration Id is : <strong>{{customerId}}</strong> . Thank You !</span>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onClose()">close</button>
+<div class="modal fade" id="loanApplicationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">LOS Response </h5><span *ngIf="reponseWait">Response is on process please wait...<img style="height:100px;width:100px;" src="assets/img/loading.gif" /></span>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div> -->
+      <div class="modal-body" *ngIf="!registrationResponseModal">
+        <span>You have successfully applied the loan our team will be in touch with you very shortly. 
+          Your registration Id is : <strong>{{loanApplicationId}}</strong> . Thank You !</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onClose()">close</button>
+      </div>
     </div>
   </div>
-</div>
 </div>
 </div>
